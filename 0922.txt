@@ -1,0 +1,156 @@
+ 
+ Collection 요소를 순회하는 Iterator
+ 요소의 순회란 
+ - 저장된 요소들을 하나씩 차례로 참조
+ - List인터페이스의 경우는 Iterator를 사용하지 않고 get(i)메서드 활용
+ - Set인터페이스의 경우 get(i) 메서드가 제공되지 않으므로 
+    Iterator를 활용하여 객체순회
+
+ hasNext() : 이후에 요소가 더 있는지를 체크하는 메서드. 요소가 있다면 t 반환
+ E next() : 다음에 있는 요소를 반환
+ 
+ 
+                   1             2
+ 초기포인트   next      
+ hasNext 
+ 
+ - .hasNext()시, 다음요소가 있는지를 묻는 함수.  초기포인트는 맨 앞에 있다.
+ - .next()시, 한칸씩 이동 후 값을 가져온다. (이후 초기포인트가 .next()로 이동)
+ - for문으로 반복하면서 찾는거 보다 iterator가 더 빠르다.(찾는데 특화.)
+
+ collection - 인덱스를 통해서 값을 가져오는 get(i), 
+                 사용하지 않은 iterator
+
+ * hashSet클래스
+ - Set인터페이스를 구현한 클래스와 멤버의 중복여부를 체크하기 위해 
+    인스턴스 동일성을 확인
+ - 동일성 구현을 위해 필요에 따라 equals와 hashCode메서드를 재정의
+
+ Member클래스의 equals()와 hashCode()메서드를 재정의해서 
+ set을 불러오는 형태~
+ 
+ 
+ *Comparable
+ #기본형
+ Arrays.sort(배열명) : 배열 오름차순
+ Arrays.sort(배열명),Collections.reverseOrder()) : 내림차순
+
+ #객체
+ - Comparable 인터페이스를 구현해야 한다.>> CompareTo>구현해야한다.
+ - 자신보다 크면 -1, 같으면0, 자신이 더크면 1<<1이 되면 자리이동
+ - 이미 compareTo가 정의되었는데 추가로 더정렬이 필요한경우
+ - Comaptator 인터페이스 구현 >> compare(ex:국어점수가 같지만 영어점수가 크면 -1)
+ - String,compareTo에서 기본적으로 문자를 오름차순으로 정리. 내림차순은 *-1.
+  <ch13.>
+ 
+ HashMap<key, value> 클래스 활용
+ - map인터페이스를 구현한 클래스와 가장 많이 사용되는 Map 인터페이스 기반 클래스
+ - key value를 쌍으로 관리하는 메서드를 구현함. (put, get,coontainsKey,CaaainsValue >> SDK문서확인) 
+ - 검색을 위한 자료구조
+ - key를 이용하여 값을 저장, key를 이용하여 값을 꺼내오는 방식 =hash알고리즘으로 구현
+
+ - .put() == .add();
+
+ set은 key1개, tree는 정렬(하려면), map<key,value>key를 알면 검색이 빨라서 정렬에 유리
+ , Iterator로 key값을 하나씩 찾게된다.
+ 
+db에서 값가져올때 레벨링을 통해서 <key,vlaue>로 
+
+
+
+
+
+37p 필기요청!
+*treeSet
+ 
+ ch13패키지 MemberTreeSet 해보기~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+123
+this.memberid = 1001 == other.memberId = 1001
+this.memberid = 1002 > other.memberId = 1001
+this.memberid = 1003 >other.memberId = 1001
+this.memberid = 1003 > other.memberId = 1002
+ 
+ 
+132
+this.memberid = 1001other.memberId = 1001
+this.memberid = 1003other.memberId = 1001
+this.memberid = 1002other.memberId = 1001
+this.memberid = 1002other.memberId = 1003
+
+
+213
+this.memberid = 1002other.memberId = 1002
+this.memberid = 1001other.memberId = 1002
+this.memberid = 1003other.memberId = 1002
+
+231
+this.memberid = 1002other.memberId = 1002
+this.memberid = 1003other.memberId = 1002
+this.memberid = 1001other.memberId = 1002
+
+
+312
+this.memberid = 1003other.memberId = 1003
+this.memberid = 1001other.memberId = 1003
+this.memberid = 1002other.memberId = 1003
+this.memberid = 1002other.memberId = 1001
+
+321
+this.memberid = 1003other.memberId = 1003
+this.memberid = 1002other.memberId = 1003
+this.memberid = 1001other.memberId = 1003
+this.memberid = 1001other.memberId = 1002
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
