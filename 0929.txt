@@ -1,0 +1,51 @@
+
+ - BufferedInputStream과 BufferedOutputStream
+입출력이 빠르게 하는 기능이제공되는 보조 스트림
+BufferedReader와 befferedWriter 는 문자영 입출력 보조 스트림
+
+dataInputStream : 크기만큼 읽어올 수 있는 함수를 제공. 
+ 보조스트림으로써 기반스트림에 얹어서 사용가능
+
+자료가 저장되어있는 상태 그대로 읽/쓰가 가능.
+
+* serialization(직렬화) : 인스턴스의 상태를 그대로 파일 저장하거나 
+  네트웤으로 전송하고 이를 다시 복원 하는 방식
+- 자바에서는 보조 스트림을 활용하여 직렬화를 제공함
+- ObjectInputStream과 ObjectOutputStream : 보조스트림
+
+* File 클래스
+ - 파일 개념을 추상화한 클래스
+ - 입출력 기능은 없고, 파일의 이름, 경로, 읽기 전용등의 속성을 알수 있음
+
+ *RandomAccessFile 클래스
+ - 입출력 클래스 중 유일하게 파일에 대한 입력과 출력을 동시에 할 수 있는 클래스
+ - 파일 포인터가 있어서 읽고 쓰는 위치의 이동이 가능함 : seek(position)
+ - 다양한 메서드가 제공됨
+
+ 
+ 
+데코레이션패턴 : BufferedReader br = new BufferedReader(new InputStreamReader (new FileInputStream(COPY_FILE)));//
+ - 자바의 입출력 스트림은 decorator pattern.(기반+보조)
+ - 여러 decorator들을 활용하여 다양한 기능을 제공
+ - ★상속보다 유연한 구현 방식(추가, 삭제가 용이)
+ - 데코레이터는 다른 데코레이터나 또는 컴포넌트를 포함해야 함
+ - 지속적인 기능의 추가와 제거가 용이함
+ - decorator와 component는동일한 것이 아님
+   (기반 클래스가 직접 읽고 쓸수 있음, 보조 추가적인 기능 제공.)
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
