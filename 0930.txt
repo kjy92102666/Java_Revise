@@ -1,0 +1,55 @@
+
+ 총 주문금액 : 650원, 주문메뉴 에스프레소 밀크 초코입니다.
+ 
+★ //데코레이터를 가진놈을 부를 수 있다.
+ new milk(new choco (new Essopreso)))형식. 
+  접근방식을 잘 숙지하자!
+ 
+*Thread 
+ - 실행중인 프로그램
+ - 프로그램이 실행되면 os로 부터 메모리를 할당받아 프로세스 상태가 됨
+ - 엑셀 프로그램을 실행하면 메모리에 탑재가 되고, 탑재된 메모리는 실행을 위해 
+ CPU에 할당 되는데 이때 할당되어서 실행되는 단위가 Thread.
+
+ - 하나의 프로세스는 하나 이상의 thread를 가지게 되고, 
+  실제 작업을 수행하는 단위는thread.
+ - 여러 thread가 동시에 수행되는 프로그래밍 여러작업이 동시에 실행되는 효과
+ - thread는 각각 자신만의 ..??
+ - 자바는 다중 상속이 허용되지 않으므로 이미 다른 클래스를 상속한 경우 
+  thread를 만들기 위해 Runnable interface를 구현하도록 한다.
+ 
+ ★ imlements Runnable
+ Runnable runnable = new Runnable() { public void run() { System.out.println("runnable 익명함수"); } };	
+ 람다식 : Runnable runnable2 = ()-> System.out.println("runnable 익명함수");
+ - 익명 클래스 . 추상화메소드 하나밖에 없는놈을 함수안에서 할필요없이, 생략시키고 사용하는 문법.
+ - Thread를 위한 별도의 클래스를 잘 만들지는 않는다~
+ 
+#20그림참조.
+ * Thread status
+  start(); >> Runnable상태 : 실행 가능한 상태.
+  run(); >> Runnable상태 : 프로그램에서 바로 떄림. CPU배분.
+  - Runnable상태에서 cpu할당을 받고 실행하기때문에, 결과값이 제각각으로 다르다.
+
+ * Sleep(시간)-시간이 지나면 다시 , wait()-notify해주면 , join()-다른 thread가 run이 종료되었을때
+ -Runnable상태에서 NotRunnable상태(CPU배분x). 
+ 
+ 
+ Thread 우선수위
+순위가 높으면 배분받을 확률이 높다.
+Thread.MIN_PRIORITY(=1) ~ Thread.MAX_PRIORITY(=10)
+-디폴트 우선순위 : Thread.NORMAL_PRIORITY(=5)
+-우선순위가 높은 쓰레드가 cpu의 배분을 받을 확률이 높다.
+setPriority()/getPriority()
+
+*join()
+ - 동시에 두개이상의 Thread가 실행 될 때 다른 Thread의 결과를 참조하여 
+    실행해야 하는 경우 join() 함수를 사용
+ - join() 함수를 호출한 Thread가 not-runnable 상태가 감
+ - 다른 Thread의 수행이 끝나면 runnable 상태로 돌아옴.
+ ex : 1부터 50(t1), 51부터 100(t2)까지의 합을 구하는 두 개의 Thread.
+ 
+ 특정상황이 왔을때 Thread를 종료해야 되는 상황.
+  
+ 
+ 
+ 
