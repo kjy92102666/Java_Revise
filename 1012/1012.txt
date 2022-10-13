@@ -1,0 +1,90 @@
+웹브라우저에서 책 참고사이트(https://thebook.io/.  https://wikidocs.net/)
+
+오전
+º BMI지수 구하기
+ -소수점 2째자리 표기법 (...printf("6.2f",변수명));
+
+º JS
+ -console.log("num의 정수값", typeof(num)); //typeof(num) = 변수의 타입표기.
+ 인터프린터 방식? 
+ 스크립트 언어방식은 에러나기전까지는 실행된다.(순차지향적언어)
+ - escape squnce : \ 얘 고유의 기능을 벗어나 실행해라. 
+    (ex : "문자열 안에 \"큰따옴표가 있어요") // 안에 "가 표기됨.
+ - \n, \t-tab, ``:back-tic? : 여러줄을 바로 표기(띄워쓰기 포함).
+ - ${num} : 문자열 안에 변수값 표기법. (== jsp EL표기법 ${})
+ NaN(Not a Number)
+ 「 2**4 = 2*2*2*2;
+   6+'10' == '610', 6-parseInt('100abc')==-94, 
+   true>false == true (0:false, !0 : true) 」
+ - 정밀도  0.1+0.2 == 0.30000000000000004
+         ((0.1*10) + (0.2*10))/10 == 0.3
+ａｌｔ＋（아스키코드숫자）　＝　그　숫자에해당하는　문자　출력
+~255(ÿ).
+ ¦ ¹ º 
+
+오후
+
+º MariaDB(==mysql) 
+ 
+ ㆍUSE madang;#사용할 데이터베이스 선택
+ ㆍVARCHAR(40) #가변캐릭터, 정수로 40까지
+ ㆍ bookid int PRIMARY KEY AUTO_INCREMENT, #기본키(PrimaryKey. 중복불가.)
+   AUTO_INCREMENT : 대량으로 생산 된 차대번호를 정하는 방식의 개념.
+  -성능측면, 확실하게 정해진 데이터타입은 정해주는게 좋다.(ex:char,int...)
+   ※java와 db간에 데이터 타입도 100%일치하기 힘드므로 맞춰주는게 좋다.
+   pri 선택시, not null.
+ ㆍnot null 미 표기시, 생략가능. 이름안넣어도 회원가입가능..?
+ 
+ /* 영향 받은 행: 0  찾은 행: 0  경고: 0  지속 시간 1 쿼리: 0.016 초 */
+ -새쿼리 만들기. ctrl+t.
+ #ForeignKey. 외래키. 테이블식별. 참조하는 테이블에 기본키를 식별.
+ 기본키가 없으면 외래키가 의미가 없음. 
+ 
+ ddl : 테이블구조 - create,alter,drop, dml : 테이블데이터 -insert,update,delete
+
+*from : 질의에 어느 테이블이 사용되는지 열거
+*select : 질의 결과 추출되는 속성리스트를 열거
+「
+  <select가 실제 처리되는 순서.>
+  FROM Customer WHERE name = '김연아' SELECTphone;
+  [phone]항목의 값만 출력.
+ 
+  [ ] : 옵션.
+  bookid AS 도서번호. 항목 AS 한글명.
+ 
+  DISTINCT publisher 중복 제거. 반드시 필드명 하나만 적용가능
+」
+*where : 질의의 조건을 작성.
+「
+  <>:같지않다.
+  LIKE : ~와 비슷한. (패턴)
+」
+ ☆실질적인 데이터처리는 sql에서 다~한다. 자바는 뒤치다꺼리를 한다..?
+ 
+º Swing
+ 윈도우 초기 설정  >>윈도우 배치 설정 >> 
+(컴포넌트 배치 설정. 위치,크기>> 원하는 컴포넌트 생성) >> 
+버튼 생성>>★프레임에 컴포넌트 등록 >> 윈도우활성화
+ 
+ 
+「 
+ ㆍtfName.setText(getName());  //값 변경,초기화.
+ ㆍ키보드 입력 컴포넌트 JTextFiled(콘솔에선 Scanner)
+  
+」
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    
+ 
+ 
+ 
+ 
+ 
