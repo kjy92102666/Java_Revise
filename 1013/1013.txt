@@ -1,0 +1,124 @@
+검색프로그램.(everything, )
+win+Shift+s : 영역캡처
+오전
+ º JS
+「타입 비교 연산자3개?typeof(),
+  '1'===1 // "===" : 값&&타입까지 비교.
+  undefined ==null; // 반환할 값이 없다.(==void)
+  !!undefined  ||  undefined===null >> false.   undefined==null >>true.
+  
+  !!Infinity >> true
+  !!null >> false
+  typeof null >> object
+  `` : 입력값 그대로 출력(SpaceBar도)
+  
+  」
+ -let으로 변수 선언시, 값 변경이 불가. const도 마찬가지.(상수이므로)메모리 할당만.
+ -const age = prompt("당신의 나이는? : "); 
+   //prompt :  입력값을 받는 함수.(==<java>Scanner, <Swing>JTextFiled)
+
+ //if 하나로만 작성하는방법. 
+        let str = '성년';
+        if(age<20){ str='미성년'; }
+        alert(str);
+ 
+
+오후
+º MariaDB(==mysql) 
+ MariaDB접속시, host/ip명에 ip주소를 치고 비밀번호
+ ping 127.0.0.1(|| localhost) = 랜카드가 유효한지 확인하는 명령어.
+ -where이 언어 if문 이라고 생각하면 편하다~
+
+「 DESC book; -- 테이블 구조 보기  」
+
+-IPv4 주소 = 172.30.1.65     172.30.1까지가 공유기 번호.  맨 끝자리는 255까지
+-win+r : Run명령어치는 란 <\\172.30.1.49>
+
+ #가격이 20,000원 미만인 도서를 검색하시오.
+「SELECT*
+ FROM book
+ WHERE price >=10000 && price <20000;
+ (==WHERE price BETWEEN 10000 AND 20000;) 
+    이상, 이하의 개념으로 포함.
+ WHERE price not BETWEEN 10000 AND 20000; 
+    (10000이상 2000이하)를 제외한 나머지수
+ 」
+ 
+  #출판사가 굿스포츠 혹은 대한미디어인 도서를 검색하시오.
+1「 SELECT *
+   FROM book
+   WHERE not publisher = '굿스포츠'OR
+   publisher='대한미디어';  」 ,
+2「FROM book
+  WHERE publisher <>'굿스포츠'&&
+            publisher<>'대한미디어'; 
+  WHERE publisher IN ('굿스포츠', '대한미디어'); 」
+ 를 제외한 나머지는 not을 붙여주면 된다.
+
+#축구의 역사를 출간한 출판사를 검색하시오.
+「SELECT publisher
+FROM book
+WHERE bookname = '축구의 역사'; 」
+
+#축구에 관련된 책을 출간한 출판사를 검색하시오.
+「SELECT publisher, bookname
+FROM book
+WHERE bookname like '%축구%'; 」
+패턴(정규식), 와일드 문자 종류.
+ -부분검색(포함검색) :  '%축구% ,  '%_구%', 
+  '_구____'(2번째 글자가 '구'가 들어간 6글자)
+
+#축구에 관한 도서가 아닌 책중 가격이 20,000원이상인 도서를 검색
+
+「 SELECT bookname,publisher,price
+  FROM book
+  WHERE bookname not LIKE "%축구%" &&
+            price >= 20000; 」
+
+「
+ +  : 문자열 연결
+ %  :  0개 이상의 문자열과 일치
+ []   : 한 개의 문자와 알치
+ [^] :  한 개의 문자와 불일치
+  _   : 특정 위치의 한 개의 문자와 일치 」
+
+
+º Swing
+
+ 윈도우 초기 설정  >>윈도우 배치 설정 >> 
+ (컴포넌트 배치 설정. 위치,크기>> 원하는 컴포넌트 생성) >> 
+ 버튼 생성>>★프레임에 컴포넌트 등록 >> 윈도우활성화
+  
+  JButton jbtn2 = new JButton(new ImageIcon("sub (2).png"));
+ //버튼 객체 안에 텍스트대신 이미지 링크를 걸어 사용 가능.
+  
+  
+ 
+ -반올림 해서 정수 만드는 함수
+ Math.round(e); // /100 하면 소수점 2째자리까지 출력.
+ 
+ 
+ 
+ 
+  
+  
+ 
+    
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+      
+ 
+ 
+ 
+ 
+ 
