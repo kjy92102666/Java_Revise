@@ -1,0 +1,361 @@
+
+객체(OOP)
+ -object <ㅡ>instance(붕어빵 틀에서 막 나온 붕어빵이라고 생각.)
+ -상대(속성)ㅡ값(데이터)
+ -행위(메서드)ㅡ기능(함수)
+
+개체 ㅡ>Entity
+관계모델 : E-R모델
+
+오전
+
+ º JS
+ js에서는 {}기호는 객체!
+ unshift : 배열에 맨 앞에 인덱스에 값을 추가하는 명령어.
+ shift : 배열에 맨 앞에 인덱스에 값을 삭제하는 명령어.
+ push : 배열에 맨 뒤에 인덱스에 값을 추가하는 명령어
+ pop : 맨 뒤에 값을 꺼내는 명령어.
+ splice(1,1) : (시작인덱스,삭제갯수)
+ includes('다') : '다'라는 값을 찾는 함수. 있는지 없는지를 알아볼 수 있다?
+여러개를 만나더라도 index는 처음, last는 마지막 값을 리턴.
+
+┏
+ indexOf('다') : '다'라는 값의 인덱스를 찾는 함수.
+ lastIndexOf('마') : '마'라는 중복된 값의 마지막 값의 인덱스를 찾는 함수.
+ indexOf로 값을 찾지 못하면 -1 리턴.
+└
+ ※함수는 Stack의 개념으로 작동된다.
+ ※js에서는 배열 관련해서 for문 보다는 while문 사용이 더 적절하다.
+    ㅡ> 데이터가 있는동안 반복 되어야 하기에 for문은 적절치 않다.
+
+ 
+오후
+
+ º MariaDB(==mysql)
+┏
+  select *  from 테이블명1, 테이브명2. // 두 테이블을 합친다.
+└
+ 
+ 
+  <JOIN. equaljoin.>
+ ※테이블의 속성값을 지목할 때, . 기호로 연결한다.
+┏#고객 테이블과 주문테이블을 합친다.
+  SELECT distinct NAME, address, saleprice
+  FROM customer, orders
+  WHERE NAME='박지성'; x 잘못된 데이터가 출력됨.
+
+  SELECT distinct NAME, address, saleprice
+  FROM customer, orders
+  WHERE customer.custid = orders.custid; O. 정확한 조건을 지목해줘야한다.
+
+└
+
+ SELECT NAME, address, bookid
+ FROM customer, orders
+ WHERE customer.custid = orders.custid AND
+ customer.custid = 1;
+
+┏SELECT NAME, address, book.bookid, bookname
+   FROM customer, orders, book
+-(join절.)
+   WHERE customer.custid = orders.custid AND
+   book.bookid = orders.bookid AND
+   customer.custid = 1;
+└
+ 
+
+SELECT NAME, address, book.bookid, bookname, phone
+FROM customer, orders, book
+WHERE customer.custid = orders.custid AND
+               book.bookid = orders.bookid AND
+customer.custid = 1;
+
+SELECT NAME, address, book.bookid, bookname, phone
+FROM customer, orders, book
+WHERE customer.custid = orders.custid AND
+               book.bookid = orders.bookid
+ORDER BY bookNAME;
+  
+ 
+ #고객의 이름과 고객이 주문한 도서의 이름을 구하시오
+SELECT NAME,bookname
+FROM customer,orders, book
+WHERE customer.custid = orders.custid AND
+        orders.bookid = book.bookid;
+        
+#가격이 2만원인 도서를 주문한 고객의 이름과 도서의 이름을 구하시오.
+SELECT  NAME, bookname, price
+FROM orders,book,customer
+WHERE orders.custid = customer.custid AND
+      orders.bookid = book.bookid and
+		price=20000;
+ 
+ #외부조인(Outer join)
+#도서를 구매하지 않은 고객을 포함하여 고객의 이름과 
+#고객이 주문한 도서의 판매가격을 구하시오.
+
+SELECT NAME, saleprice
+FROM customer, orders
+WHERE customer LEFT OUTER JOIN orders
+  ON custer;		//On에 = 에 해당하는 조건
+
+
+
+   SELECT NAME, saleprice
+   FROM customer LEFT OUTER JOIN orders
+   ON customer.custid = orders.custid;
+  ※JOIN을 명확하게 사용할 때는 where절 x.
+ 
+ 동등JOIN
+  SELECT NAME, saleprice
+  FROM customer JOIN orders
+  ON customer.custid = orders.custid;
+
+
+ #도서를 구매한 적이 있는 고객의 이름을 검색하시오
+  SELECT NAME
+  FROM customer
+  WHERE custid IN (    --여러개의 값이 실제 쓴것처럼
+          SELECT custid
+          FROM orders);
+IN 집합개념. 
+ 
+복잡한 문제를 (단위, 기능별로)쪼개서 해결하는 알고리즘 기법. - 분할정복(Divide and conquer)
+#대한미디어에서 출판한 도서를 구매한 고개의이름을 보이시오.
+SELECT NAME
+FROM customer
+WHERE custid IN(
+	SELECT custid
+	FROM orders
+	WHERE bookid IN ( SELECT bookid
+			FROM book
+			WHERE publisher='대한미디어')
+	);
+
+
+
+#대한미디어에서 출판한 도서를 구매한 고개의이름을 보이시오.
+SELECT NAME
+FROM customer
+WHERE custid IN(
+		SELECT custid
+		FROM orders
+		WHERE bookid IN ( SELECT bookid
+											FROM book
+											WHERE publisher='대한미디어')
+	);
+#출판사별로 출판사의 평균 도서 가격보다 비싼 도서를 구하시오. 
+SELECT publisher, AVG(price)
+FROM book b1    -- b1별칭.
+WHERE b1.price > (
+		SELECT AVG(b2.price)
+		FROM book b2
+		WHERE b2.publisher = b1.publisher //대한미디어 2개 조건.
+			);
+
+
+
+
+ º Swing
+ 윈도우 (프레임)생성 순서 : win이름의frame >> 버튼component >> Divide클래스생성
+
+
+ 1.
+ 2.
+ 3.클래스 간에 reference를 공유하는 방법
+ 4.내부클래스 - 멤버들을 참조없이 바로 쓸 수 있다.
+ 5.람다식. 
+
+ 메인이 있는 클래스는 반드시 클래스명으로 존재해야함.
+ 
+ 
+ 
+
+
+
+ package test;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+//https://cafe.naver.com/webdev2202
+public class RRNStr extends JFrame implements ActionListener{
+
+	private JLabel lblRRN;
+	private JLabel lblName;
+	private JLabel lblResult;
+	
+	private JTextField lbltfRRN;
+	private JTextField lbltfName;
+	private JTextField lbltfResult;
+    
+	Date now = new Date(); //현재시간 나타내기 위한 객체생성
+	
+	
+
+	public RRNStr() {
+		
+		//윈도우 초기설정
+		this.setTitle("주민등록번호 문자열 처리기");
+		this.setSize(600, 750);
+		
+		
+		
+		//윈도우 배치설정? 의미Q
+		this.setLayout(null);
+		
+		//컴포넌트 생성
+		//버튼 생성
+		lblRRN = new JLabel("주민번호");
+		lblRRN.setBounds(40,100,80,40);
+		lblName = new JLabel("이 름");
+		lblName.setBounds(40,180,80,40);
+		lblResult = new JLabel("체크결과");
+		lblResult.setBounds(40,260,80,40);
+		
+		lbltfRRN = new JTextField();
+		lbltfRRN.setBounds(130,100,120,40);
+		lbltfName = new JTextField();
+		lbltfName.setBounds(130,180,120,40);
+		lbltfResult = new JTextField();
+		lbltfResult.setBounds(130,260,120,40);
+		
+		JButton jbtn_age = new JButton("나이");
+		jbtn_age.setBounds(40,340,80,40);
+		jbtn_age.addActionListener(this); 
+		
+		JButton jbtn_gen = new JButton("성별");
+		jbtn_gen.setBounds(120,340,120,40);
+		jbtn_gen.addActionListener(this); 
+		
+//		JButton jbtn_adult = new JButton("성인여부");
+//		jbtn_adult.setBounds(100,340,120,40);
+//		jbtn_adult.addActionListener(this); 
+		
+//		JButton jbtn_area = new JButton("지역");
+//		jbtn_area.setBounds(100,340,120,40);
+//		jbtn_area.addActionListener(this); 
+
+		
+		
+		//프레임에 컴포넌트 등록
+		this.add(lblRRN);
+		this.add(lblName);
+		this.add(lblResult);
+		this.add(lbltfRRN);
+		this.add(lbltfName);
+		this.add(lbltfResult);
+		this.add(jbtn_age);
+		this.add(jbtn_gen);
+		//this.add(jbtn_adult);
+		//this.add(jbtn_area);
+
+		//윈도우 활성화
+		this.setVisible(true);
+		this.setResizable(false);
+		
+	}
+	
+	
+	//주민번호 앞자리 8자리로.(1900,2000 구분하려고.)
+	@Override
+		public void actionPerformed(ActionEvent e) {
+			String rrn = lbltfRRN.getText();
+			String rrnstrY = rrn.substring(0,4);//0,1인덱스 문자커팅
+
+			String name = lbltfName.getText();
+			String adult = "";
+			
+			SimpleDateFormat formatter = 
+					new SimpleDateFormat("yyyy년 MM월 dd일");    
+			// 포맷팅 적용        
+			String formatedY = formatter.format(now);  	 
+			
+			// 포맷팅 현재 날짜/시간 출력        
+			String formatNowY = formatedY.substring(0,4);
+			
+			int fNowY = Integer.parseInt(formatNowY);//현재 년도
+			int rrnY = Integer.parseInt(rrnstrY);
+
+			
+			int age = 0;	 //현재 나이.
+			String gen = ""; //현재 성별.
+			
+			//String formatedM = formatter.format(rrn); 
+			String formatNowB = rrn.substring(9,10);
+			
+			int fNowB = Integer.parseInt(formatNowB);	//주민번호 뒷자리
+			//int rrnY = Integer.rrnNum 
+			
+			if( ((rrnY>=1900) && (rrnY<2000)) ) { // 00년생 이전이면~ 주민 앞자리1,2
+					
+				if( ( fNowY-rrnY ) > 19  ){
+					age = (fNowY-rrnY)+1;	//만 나이를 제거하기위해 +1해줌.
+					adult = "성년, 20세기";
+					if(fNowB==1) {
+						gen = "남성";
+					}else if(fNowB==2) {
+						gen = "여성";
+					}
+				}
+//				else if( ( fNowY-rrnY ) <= 19 ) {
+//					age = (fNowY-rrnY)+1;
+//					adult = "미성년";
+//				}
+				
+			}else if((rrnY>=2000) && (rrnY<2100)) {// 00년생 이후이면~ 주민 앞자리3,4
+
+				if( ( fNowY-rrnY ) > 19  ){
+					age = (fNowY-rrnY)+1;
+					adult = "성년, 21세기";
+						if(fNowB==3) {
+							gen = "남성";
+						}else if(fNowB==4) {
+							gen = "여성";
+						}
+				}else if( ( fNowY-rrnY ) <= 19 ) {
+					age = (fNowY-rrnY)+1;
+					adult = "미성년, 21세기";
+						if(fNowB==3) {
+							gen = "남성";
+						}else if(fNowB==4) {
+							gen = "여성";
+						}
+				}
+			}
+			
+			lbltfResult.setText(age+"");
+			lbltfResult.setText(gen+"");
+			//lbltfResult.setText("성인여부 : " + age + ", " + adult+","+gen);
+			//lbltfResult.setText("지역 : " + age + ", " + adult+","+gen);
+			
+	}
+	
+	public static void main(String[] args) {
+		RRNStr rrnstr = new RRNStr();
+		
+	}
+
+}
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+  
