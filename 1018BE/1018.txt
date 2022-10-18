@@ -1,0 +1,174 @@
+* public class는 하나만 존재해야한다.
+* try-catch 는 넓은 범위에서 좁은 범위로 접근방식.
+ https://thebook.io/  더북
+ https://wikidocs.net/  위키독스
+오전
+
+ º JS
+
+ value= // 밸류속성써서 값을 넣지않으면 기본값이 들어간다.
+ padding : 박스 안쪽여백
+ margin : 박스 바깥쪽 (박스끼리)여백.  50px(상,하) auto(좌,우); 
+
+ position:static,relative,absolute
+ script. body만 끝나고 난 뒤쪽에 선언하면된다.
+
+*사칙연산 계산기만들기.document.f1.result.value=result;
+
+
+오후
+
+ º MariaDB(==mysql)
+ 합집합 UNION, 차집합 MINUS, 교집합 INTERSECT
+{도서를 주문하지 않은 고객} = 모든고객 - 도서를 주문한 고객
+exists 존재여부(includes와 비슷)
+
+
+dml-select(join,subquery...)
+
+데이터 정의어ddl(create,alter,drop-table)
+
+dcl(Database Control Language) : 관리자 권한만 할 수 있는 언어.
+기본기(primary key) = UNIQUE+NOTNULL. 필수사항.
+참조대상의 값이 삭제되었을때(ON)
+ON DELETE {CASECADE | SET NULL}
+                연쇄 삭제    비워둠(key만 NULL로)
+
+isbn : 전세계 책들을 구분 할 수 있는 고유번호?
+
+
+
+ º Swing
+ new panel();   //JFrame과 비슷한 container. 
+   배치하기 편하게 뭔가 담아놓는 공간.
+ System.exit : 강제적으로 JVM을 종료
+ 
+ addKeyListener( new KeyListener() {
+
+
+keyPressed : 가장 먼저발생. 눌렀을때 발생
+keyReleased : 눌렀다 뗄때 발생
+keyTyped : 눌렀다 반드시 떼야 발생
+});
+ 
+KeyEvent.VK_UP : 가상 업키.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package CarGame;
+
+import java.awt.BorderLayout;
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+class Mypanel extends JPanel{ //패널은 언젠가는 jframe에 들어가야한다. ==.패널을 달 벽이 필요하다~.
+	//여러명과 여러 패널들로 나눠서 팀별작업가능.
+	BufferedImage img = null; //버퍼. 임시보관(잠깐쓰고 사라질 수 있). 여기서는 이미지.
+	int img_x = 100; //시작 지점
+	int img_y = 100; //잡기.
+	
+	public Mypanel() {
+		try {
+			img = ImageIO.read(new File("car.gif"));
+		}catch(IOException e) {
+			System.out.println("no image");
+			System.exit(1);//콘솔 출력 후 강력하게 죽는다?
+		}
+		
+		addKeyListener(new KeyListener() {//addACtion... 이 아니라 key값을 받아 작동하는 함수
+			
+			@Override//눌렀다 반드시 떼야 발생
+			public void keyTyped(KeyEvent e) { }
+			
+			@Override//눌렀다 뗄때 발생.
+			public void keyReleased(KeyEvent e) { }
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				//가장 먼저발생. 눌렀을때 발생. 방향키를 쓸건지, 문자키를 방향키 대신으로 쓸건지 정해야함.
+				int keycode = e.getKeyCode();//뭐가 눌려졌는지 알아낸다
+				switch(keycode) {
+				case KeyEvent.VK_UP:	
+					if(img_y >= 10) {
+						img_y -= 10;
+					}else {
+						img_y += 10;//충돌시, 튕겨나오는 효과?
+					}
+					break;
+				case KeyEvent.VK_DOWN:
+					img_y += 10;
+					break;
+				case KeyEvent.VK_LEFT:
+					img_x -= 10;
+					break;
+				case KeyEvent.VK_RIGHT:
+					img_x += 10;
+					break;
+				//이동하고 그 위치를 그려준다는 느낌.
+				}
+				//이동한 좌표에서 자동차 다시 그리기
+				repaint();
+			}
+			
+		});
+		//키보드가 자동으로 연결되지 않기에 연결해주는 작업을 해줘야함...
+		//패널에서 키보드 이벤트가 적용되도록 설정.
+		this.requestFocus();
+		this.setVisible(false);
+		this.setFocusable(true);
+		
+	}
+	//패널 안에 메소드
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(img, img_x, img_y, null);//위치 바꾸고 이미지를 다시 그린다.
+	}
+	
+	
+}
+
+
+public class CarGame extends JFrame{
+	public CarGame() {
+		//객체 생성
+		
+		//윈도우 초기화
+		this.setTitle("자동차 게임");
+		this.setSize(300,300);
+		setResizable(false);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//정확하게 종료버튼기능을 적용. 화면에선 사라지지만 메모리에선 사라지지x
+		
+		//컴포넌트 생성. borderlayout
+		add(new Mypanel()); //JFrame과 비슷한 container. 뭔가 담아놓는 공간.
+		//add(new Mypanel(), BorderLayout.CENTER); 위와 같은 개념.
+		//컴포넌트 등록
+		
+		
+		this.setVisible(true);
+		
+	}
+	
+	public static void main(String[] args) {
+		new CarGame();
+	}
+}
